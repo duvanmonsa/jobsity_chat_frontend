@@ -1,7 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Jobsity Frontend
+## Clone project
 
-## Available Scripts
+### `git clone git@github.com:duvanmonsa/jobsity_chat_frontend.git`
 
-In the project directory, you can run:
+## Install dependencies
+
+### `npm i`
+## Start Frontend
 
 ### `npm start`
+
+
+## Open browser
+
+http://localhost:3000/

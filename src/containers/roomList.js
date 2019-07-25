@@ -25,7 +25,7 @@ export class RoomList extends Component {
     });
   }
   renderRoom = (room) => {
-    return <div key={room.id} className="room-item"> {room.name} <Link to={`/room/${room.id}/messages`}><Button>Open</Button></Link></div>
+    return <div key={room.id} className="room-item"> {room.name} <Link to={`/room/${room.id}/messages`}><Button type="primary">Open</Button></Link></div>
   }
 
   render() {

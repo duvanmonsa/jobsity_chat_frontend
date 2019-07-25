@@ -1,5 +1,12 @@
 .chat {
   padding: 20px 0px;
+  ul {
+    display: flex;
+    li {
+      list-style: none;
+      margin-right: 20px;
+    }
+  }
 }
 .login {
   margin-top: 100px;
@@ -15,13 +22,10 @@
 }
 .messages {
   width: 800px;
+  margin-left: 40px;
   .message-item {
     padding: 10px 0px;
     margin-bottom: 5px;
-    border-bottom: 1px solid black;
-    span {
-      background: grey;
-      color: white;
-    }
-  }   
+    border-bottom: 1px solid lightblue;
+  }  
 }

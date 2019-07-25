@@ -27,9 +27,12 @@ class Routes extends Component {
         <ul>
           <li>
             <Link to="/">Chat Rooms</Link>
+          </li>
+          <li>
             {this.props.auth.idToken && this.props.auth.user.name}
-            {this.props.auth.idToken && <Button onClick={this.props.logout}>Salir</Button>}
-
+          </li>
+          <li>
+            {this.props.auth.idToken && <Button type="danger" onClick={this.props.logout}>Salir</Button>}
           </li>
         </ul>
 
@@ -38,7 +41,7 @@ class Routes extends Component {
         <Route exact path="/" component={RoomList} />
         <Route path="/room/:id" component={CurrentRoom} />
       </div>
-    </Router>;
+    </Router >;
   }
 }
 
