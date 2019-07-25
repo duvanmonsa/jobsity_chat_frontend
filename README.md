@@ -1,14 +1,18 @@
 Jobsity Frontend
 ## Clone project
-
-### `git clone git@github.com:duvanmonsa/jobsity_chat_frontend.git`
+```
+$ git clone git@github.com:duvanmonsa/jobsity_chat_frontend.git
+```
 
 ## Install dependencies
-
-### `npm i`
+```
+$ npm i
+```
 ## Start Frontend
 
-### `npm start`
+```
+$ npm start
+```
 
 
 ## Open browser
