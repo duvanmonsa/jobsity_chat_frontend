@@ -1,28 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Spin, Button, Input } from 'antd';
+import { Spin, Button, Input, Tag } from 'antd';
+import socketIOClient from "socket.io-client";
 
 import chatroomActions from '../redux/chatroom/actions';
+import { getToken } from '../utils/utility';
 
 
-const { getRoomMessages } = chatroomActions;
+const { getRoomMessages, addMessage } = chatroomActions;
+const { idToken } = getToken();
+const socket = socketIOClient('localhost:4000', {
+  extraHeaders: {
+    'Authorization': `Bearer ${idToken}`
+  }
+});
 
 export class CurrentRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true
+      loading: true,
+      message: '',
+      sending: false
     };
   }
   componentDidMount() {
-    this.props.getRoomMessages(this.props.id).then(() => {
+    this.props.getRoomMessages(this.props.match.params.id).then(() => {
       this.setState({ loading: false });
     }).catch(err => {
       this.setState({ loading: false });
     });
+    // get new message
+    socket.on("new_message", this.props.addMessage);
   }
   renderMessage = (message) => {
-    return <div key={message.id} className="message-item"><span>{message.User.name}</span> {message.text} </div>
+    return <div key={message.id} className="message-item"><Tag>{message.User.name}</Tag> {message.text} </div>
+  }
+  sendMessage = () => {
+    socket.emit('message', { chatroomId: this.props.match.params.id, text: this.state.message, tokenId: `Bearer ${idToken}` })
+    this.setState({ message: '' });
+
+  }
+
+  componentWillUnmount = () => {
+    socket.off("message");
+    socket.off("new_message");
   }
 
   render() {
@@ -30,18 +52,20 @@ export class CurrentRoom extends Component {
       return <Spin />
     }
     return <div className="messages">
-      {this.props.messages.map((message) => {
+      {this.props.currentRoom.messages.map((message) => {
         return this.renderMessage(message);
       })}
-      <Input placeholder="Type..." />
-      <Button onClick={this.props.back}>Back</Button>
+      <Input value={this.state.message} placeholder="Type..." onChange={(e) => {
+        this.setState({ message: e.target.value })
+      }} />
+      <Button type="primary" onClick={this.sendMessage} loading={this.state.sending}>Send Message</Button>
     </div>
   }
 }
 
 export default connect(
   state => ({
-    messages: state.ChatRoom.currentRoom.messages
+    currentRoom: state.ChatRoom.currentRoom
   }),
-  { getRoomMessages }
+  { getRoomMessages, addMessage }
 )(CurrentRoom);

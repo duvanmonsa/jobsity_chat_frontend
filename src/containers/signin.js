@@ -4,6 +4,8 @@ import { Form, Button, Input, notification } from 'antd';
 
 import authAction from '../redux/auth/actions';
 
+import './chatroom.scss';
+
 const { login } = authAction;
 
 class SignIn extends Component {

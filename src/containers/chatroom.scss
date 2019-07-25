@@ -1,19 +1,27 @@
 .chat {
+  padding: 20px 0px;
+}
+.login {
+  margin-top: 100px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.rooms {
   padding: 20px;
-  .login {
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+  .room-item {
+    margin: 10px 0px;
   }
-  .messages {
-    .message-item {
-      padding: 10px 0px;
-      margin-bottom: 5px;
-      border-bottom: 1px solid black;
-      span {
-        background: grey;
-        color: white;
-      }
-    }   
-  }
+}
+.messages {
+  width: 800px;
+  .message-item {
+    padding: 10px 0px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+    span {
+      background: grey;
+      color: white;
+    }
+  }   
 }

@@ -17,6 +17,14 @@ export default function conversationReducer(state = initState, action) {
           messages: action.payload.data
         }
       };
+    case actions.ADD_MESSAGE:
+      const messages = state.currentRoom.messages;
+      messages.push(action.payload);
+      return {
+        ...state, currentRoom: {
+          messages
+        }
+      };
     default:
       return state;
   }

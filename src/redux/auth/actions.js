@@ -8,6 +8,7 @@ const actions = {
   checkAuthorization: () => {
     return function (dispatch, getState, axios) {
       const { idToken } = getToken();
+
       if (idToken) {
         dispatch({
           type: actions.LOGIN_SUCCESS,

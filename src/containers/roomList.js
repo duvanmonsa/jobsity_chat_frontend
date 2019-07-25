@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Spin, Button } from 'antd';
+import { Link } from "react-router-dom";
 
 import chatroomActions from '../redux/chatroom/actions';
 import CurrentRoom from './currentRoom';
+
+import './chatroom.scss';
 
 const { getRooms } = chatroomActions;
 
@@ -11,8 +14,7 @@ export class RoomList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
-      currentRoom: null
+      loading: true
     };
   }
   componentDidMount() {
@@ -23,9 +25,7 @@ export class RoomList extends Component {
     });
   }
   renderRoom = (room) => {
-    return <div key={room.id} className="room-item"> {room.name} <Button onClick={() => {
-      this.setState({ currentRoom: room.id });
-    }}>Open</Button></div>
+    return <div key={room.id} className="room-item"> {room.name} <Link to={`/room/${room.id}/messages`}><Button>Open</Button></Link></div>
   }
 
   render() {
@@ -33,9 +33,7 @@ export class RoomList extends Component {
       return <Spin />
     }
     if (this.state.currentRoom) {
-      return <CurrentRoom id={this.state.currentRoom} back={() => {
-        this.setState({ currentRoom: null })
-      }} />
+      return <CurrentRoom id={this.state.currentRoom} />
     }
     return <div className="rooms">
       {this.props.chatroom.rooms.map((room) => {
